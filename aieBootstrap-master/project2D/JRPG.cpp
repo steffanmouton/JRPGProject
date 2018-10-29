@@ -77,7 +77,7 @@ void JRPG::update(float deltaTime)
 void JRPG::draw()
 {
 
-	//
+	//Menu
 	ImGui::BeginMenu("Battle");
 	if (ImGui::Button("Attack", ImVec2(200, 200)))
 	{
