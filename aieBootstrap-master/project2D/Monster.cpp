@@ -28,4 +28,12 @@ Monster::~Monster()
 {
 }
 
+void Monster::pUpdate(float dt)
+{
+}
+
+void Monster::pDraw(aie::Renderer2D * renderer)
+{
+}
+
 

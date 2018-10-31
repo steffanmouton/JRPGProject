@@ -3,6 +3,11 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Monster.h"
+#include "Texture.h"
+#include "Font.h"
+#include "Input.h"
+#include <imgui.h>
+#include <iostream>
 #include <Renderer2D.h>
 
 
@@ -15,7 +20,7 @@ public:
 	bool startup() override;
 	void shutdown() override;
 
-	void update(float deltaTime) override;
+	void update(float dt) override;
 	void draw() override;
 
 	

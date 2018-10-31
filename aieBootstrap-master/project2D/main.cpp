@@ -1,6 +1,5 @@
 #include "Application2D.h"
 #include "JRPG.h"
-#include "Entity.h"
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>

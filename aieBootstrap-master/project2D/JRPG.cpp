@@ -1,9 +1,5 @@
 #include "JRPG.h"
-#include "Texture.h"
-#include "Font.h"
-#include "Input.h"
-#include <imgui.h>
-#include <iostream>
+
 
 
 JRPG::JRPG()
@@ -19,19 +15,21 @@ bool JRPG::startup()
 {
 
 	renderer = new aie::Renderer2D();
-
+	Sakura = new Player{ 100, 30, 10 };
+	
 	m_RathIdle = new aie::Texture("./textures/RathIdleAnimation.png");
 	m_HunterSakuraIdle = new aie::Texture("./textures/HunterSakuraIdle1.png");
 	m_HunterSakuraAttack = new aie::Texture("./textures/HunterSakuraAttackAnimation.png");
 	m_HunterSakuraDying = new aie::Texture("./textures/HunterSakuraDying.png");
 	m_HunterSakuraDead = new aie::Texture("./textures/HunterSakuraDead.png");
+	Sakura->textures = {m_HunterSakuraAttack, m_HunterSakuraDead, m_HunterSakuraDying, m_HunterSakuraIdle };
 	m_CurMonAnimation = m_RathIdle;
 	m_CurPlayerAnimation = m_HunterSakuraIdle;
 
 
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
-	Sakura = new Player{ 100, 30, 10};
+	
 	Rathalos = new Monster{ 300, 20, 1};
 	Sakura->SetTarget(Rathalos);
 	Rathalos->SetTarget(Sakura);
@@ -96,9 +94,7 @@ void JRPG::draw()
 	ImGui::BeginMenu("Battle");
 	if (ImGui::Button("Attack", ImVec2(100, 50)))
 	{
-		Sakura->Attack();
-		Rathalos->Attack();
-		pAn = pAttack;
+		Sakura->Attacking = true;
 
 	}
 	if (ImGui::Button("Items", ImVec2(100, 50)))
@@ -128,6 +124,7 @@ void JRPG::draw()
 	renderer->begin();
 
 	////draw player
+	Sakura->pDraw(renderer);
 	//renderer->setUVRect(0, 0, 1, 1);
 	//renderer->drawSprite(m_HunterSakura, 600, 400, 0, 0, 0, 1, 0, 0);
 
@@ -150,8 +147,7 @@ void JRPG::draw()
 		break;
 
 	case pAttack:
-		m_CurPlayerAnimation = m_HunterSakuraAttack;
-		renderer->setUVRect(int(m_timer * 8) % 27 / 27.0f, 150, 1.f / 27, 1.f);
+		
 		startTime = m_timer;
 		drawTimer += (m_timer - startTime);
 		
