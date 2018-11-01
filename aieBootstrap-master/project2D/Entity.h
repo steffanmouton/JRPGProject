@@ -1,6 +1,8 @@
 #pragma once
 #include "Renderer2D.h"
 #include <vector>
+#include "Rect.h"
+
 class Entity
 {
 protected:
@@ -14,7 +16,8 @@ public:
 	Entity();
 	~Entity();
 
-	bool Attacking = false;
+	float m_timer;
+	
 	
 	void TakeDmg(int Dmg);
 	int DealDmg();
@@ -23,9 +26,15 @@ public:
 	void SetTarget(Entity* targ);
 	bool isAlive();
 	virtual void pUpdate(float dt) = 0;
-	virtual void pDraw(aie::Renderer2D* renderer) = 0;
-	enum AnimState { eIdle, eAttack, eDead } eAn = eIdle;
+	/*virtual void pDraw(aie::Renderer2D* renderer) = 0;*/
+	enum EntityState { Idle, Attacking, Dead };
+	EntityState eState = Idle;
 	std::vector<aie::Texture*> textures;
+	std::vector<Rect*> uvRects;
+	aie::Texture* m_CurTexture;
+	Rect* m_CurUV;
+
+	void eDraw(aie::Renderer2D* renderer, Rect * UVRect);
 
 	Entity* m_Target;
 };

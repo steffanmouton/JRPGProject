@@ -32,8 +32,8 @@ void Monster::pUpdate(float dt)
 {
 }
 
-void Monster::pDraw(aie::Renderer2D * renderer)
-{
-}
+//void Monster::pDraw(aie::Renderer2D * renderer)
+//{
+//}
 
 

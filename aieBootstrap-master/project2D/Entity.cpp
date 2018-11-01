@@ -40,3 +40,10 @@ bool Entity::isAlive()
 {
 	return this->m_Hp >= 0 ? true : false;
 }
+
+void Entity::eDraw(aie::Renderer2D * renderer, Rect * UVRect)
+{
+	renderer->setUVRect(int(m_timer * UVRect->UVspeed) % UVRect->cycles / UVRect->cycles, 
+		UVRect->y, 1.f / UVRect->cycles, 1.f);
+	renderer->drawSprite(m_CurTexture, 600, 400, 0, 0, 0, 1, 0, 0);
+}

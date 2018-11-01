@@ -14,7 +14,7 @@ public:
 	// Inherited via Entity
 	virtual void pUpdate(float dt) override;
 
-	virtual void pDraw(aie::Renderer2D * renderer) override;
+	/*virtual void pDraw(aie::Renderer2D * renderer) override;*/
 
 };
 

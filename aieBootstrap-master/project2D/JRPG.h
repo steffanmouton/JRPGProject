@@ -40,12 +40,6 @@ protected:
 	Entity* Sakura;
 	Entity* Rathalos;
 
-	enum pAnimate { pIdle, pAttack, pDead } pAn = pIdle;
-	enum mAnimate { mIdle, mAttack, mDead } mAn = mIdle;
-
-	int pAnCount = 0;
-	int mAnCount = 0;
-
 	float m_cameraX, m_cameraY;
 	float m_timer;
 };

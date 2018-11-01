@@ -18,28 +18,54 @@ Player::~Player()
 
 void Player::pUpdate(float dt)
 {
-	if (!Attacking)
+	m_timer += dt;
+
+	if (!isAlive())
 	{
-		AnimationStart += dt;
+		eState = Dead;
 	}
-	else
+
+	switch (eState)
 	{
-		
-		this->m_CurPlayerAnimation = textures.at(0);
+	case Entity::EntityState::Idle:
+	{
+		this->m_CurTexture = textures.at(0);
+		this->m_CurUV = uvRects.at(0);
+		AnimationStart += dt;
+		break;
+	}
+	case Entity::EntityState::Attacking:
+	{
+		this->m_CurTexture = textures.at(1);
+		this->m_CurUV = uvRects.at(1);
 		AnimationDraw += (m_timer - AnimationStart);
 
 		if (AnimationDraw >= 5.f)
 		{
-			//m_CurPlayerAnimation = m_HunterSakuraIdle;
 			AnimationStart = 0;
 			AnimationDraw = 0;
-			Attacking = false;
+			eState = Idle;
 		}
+		break;
+	}
+	case Entity::EntityState::Dead:
+	{
+		this->m_CurTexture = textures.at(2);
+		this->m_CurUV = uvRects.at(2);
+		AnimationDraw += (m_timer - AnimationStart);
 
+		if (AnimationDraw >= 5.f)
+		{
+			AnimationStart = 0;
+			AnimationDraw = 0;
+			eState = Idle;
+		}
+		break;
+	}
 	}
 }
-
-void Player::pDraw(aie::Renderer2D* renderer)
-{
-	renderer->setUVRect(int(m_timer * 8) % 27 / 27.0f, 150, 1.f / 27, 1.f);
-}
+//
+//void Player::pDraw(aie::Renderer2D* renderer)
+//{
+//	renderer->setUVRect(int(m_timer * 8) % 27 / 27.0f, 150, 1.f / 27, 1.f);
+//}
