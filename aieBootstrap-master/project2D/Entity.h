@@ -1,4 +1,6 @@
 #pragma once
+#include "Rect.h"
+
 class Entity
 {
 protected:
@@ -17,6 +19,7 @@ public:
 	void Attack();
 	void SetTarget(Entity* targ);
 	bool isAlive();
+	Rect uvRect;
 
 	Entity* m_Target;
 };
