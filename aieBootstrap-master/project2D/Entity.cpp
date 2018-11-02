@@ -18,7 +18,7 @@ void Entity::TakeDmg(int Dmg)
 
 int Entity::DealDmg()
 {
-	return rand() % m_MaxDmg + m_MinDmg;
+	return rand() % (m_MaxDmg-10) + m_MinDmg;
 }
 
 int Entity::getHp()
@@ -41,9 +41,10 @@ bool Entity::isAlive()
 	return this->m_Hp >= 0 ? true : false;
 }
 
-void Entity::eDraw(aie::Renderer2D * renderer, Rect * UVRect)
+void Entity::eDraw(aie::Renderer2D * renderer)
 {
-	renderer->setUVRect(int(m_timer * UVRect->UVspeed) % UVRect->cycles / UVRect->cycles, 
-		UVRect->y, 1.f / UVRect->cycles, 1.f);
-	renderer->drawSprite(m_CurTexture, 600, 400, 0, 0, 0, 1, 0, 0);
+	renderer->setUVRect(int(AnimationDraw * m_CurUV->UVspeed) % m_CurUV->cycles / float(m_CurUV->cycles), 
+		m_CurUV->y, 1.f / float(m_CurUV->cycles), 1.f);
+	renderer->drawSprite(m_CurTexture, screenPosition.x, screenPosition.y, m_CurUV->maxWidth, 
+		m_CurUV->maxHeight, 0, 1, 0, 0);
 }

@@ -71,6 +71,9 @@
     <ClInclude Include="Rect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Project2D.rc">

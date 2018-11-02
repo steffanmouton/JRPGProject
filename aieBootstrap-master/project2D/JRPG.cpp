@@ -6,7 +6,6 @@ JRPG::JRPG()
 {
 }
 
-
 JRPG::~JRPG()
 {
 }
@@ -20,21 +19,35 @@ bool JRPG::startup()
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	//loading Rathalos animations and target
-	Rathalos = new Monster{ 300, 20, 1 };
-	m_RathIdle = new aie::Texture("./textures/RathIdleAnimation.png");
-	Rathalos->m_CurTexture = m_RathIdle;
-	Rathalos->SetTarget(Sakura);
+	m_MonsterPos = { 1200, 600 };
+	MonsterChar = new Monster{ 300, 100, 10, m_MonsterPos };
+	m_MonsterIdle = new aie::Texture("./textures/RathIdleAnimation.png");
+	m_MonsterIdleUV = new Rect(14, 1.f, 7, 846, 546);
+
+	MonsterChar->textures = { m_MonsterIdle };
+	MonsterChar->uvRects = { m_MonsterIdleUV };
+
+	MonsterChar->m_CurTexture = MonsterChar->textures[0];
+	MonsterChar->m_CurUV = MonsterChar->uvRects[0];
 
 	//loading hunter Sakura animations and target
-	Sakura = new Player{ 100, 30, 10 };
-	m_HunterSakuraIdle = new aie::Texture("./textures/HunterSakuraIdle1.png");
-	m_HunterSakuraAttack = new aie::Texture("./textures/HunterSakuraAttackAnimation.png");
-	m_HunterSakuraDying = new aie::Texture("./textures/HunterSakuraDying.png");
-	m_HunterSakuraDead = new aie::Texture("./textures/HunterSakuraDead.png");
-	Sakura->textures = {m_HunterSakuraAttack, m_HunterSakuraDead, m_HunterSakuraDying, m_HunterSakuraIdle };
-	// TODO: Make UVRects squares and vectors : Sakura->uvRects = {}
-	Sakura->m_CurTexture = m_HunterSakuraIdle;
-	Sakura->SetTarget(Rathalos);
+	m_PlayerPos = { 400, 600 };
+	PlayerChar = new Player{ 100, 30, 10, m_PlayerPos };
+	m_PlayerIdle = new aie::Texture("./textures/HunterSakuraIdle1.png");
+	m_PlayerIdleUV = new Rect(4, 1.f, 7, 153, 150);
+	m_PlayerAttack = new aie::Texture("./textures/HunterSakuraAttackAnimation.png");
+	m_PlayerAttackUV = new Rect(27, 1.f, 7, 153, 150);
+	m_PlayerDying = new aie::Texture("./textures/HunterSakuraDying.png");
+	m_PlayerDyingUV = new Rect(1, 1.f, 7, 153, 150);
+	m_PlayerDead = new aie::Texture("./textures/HunterSakuraDead.png");
+	m_PlayerDeadUV = new Rect(1, 1.f, 7, 153, 150);
+
+	PlayerChar->textures = {m_PlayerIdle, m_PlayerAttack, m_PlayerDying, m_PlayerDead };
+	PlayerChar->uvRects = { m_PlayerIdleUV, m_PlayerAttackUV, m_PlayerDyingUV, m_PlayerDeadUV };
+
+	PlayerChar->m_CurTexture = PlayerChar->textures[0];
+	PlayerChar->m_CurUV = PlayerChar->uvRects[0];
+	PlayerChar->SetTarget(MonsterChar);
 
 	m_cameraX = 0;
 	m_cameraY = 0;
@@ -46,10 +59,10 @@ bool JRPG::startup()
 void JRPG::shutdown()
 {
 	delete m_font;
-	delete m_RathIdle;
-	delete m_HunterSakuraIdle;
+	delete m_MonsterIdle;
+	delete m_PlayerIdle;
 	delete renderer;
-	delete Sakura;
+	delete PlayerChar;
 	
 }
 
@@ -58,6 +71,9 @@ void JRPG::update(float deltaTime)
 	m_timer += deltaTime;
 	// input example
 	aie::Input* input = aie::Input::getInstance();
+
+	PlayerChar->eUpdate(deltaTime);
+	MonsterChar->eUpdate(deltaTime);
 
 	// use arrow keys to move camera
 	if (input->isKeyDown(aie::INPUT_KEY_UP))
@@ -80,8 +96,6 @@ void JRPG::update(float deltaTime)
 		quit();
 }
 
-float drawTimer;
-float startTime;
 
 void JRPG::draw()
 {
@@ -90,7 +104,7 @@ void JRPG::draw()
 	ImGui::BeginMenu("Battle");
 	if (ImGui::Button("Attack", ImVec2(100, 50)))
 	{
-		Sakura->eState = Entity::EntityState::Attacking;
+		PlayerChar->eState = Entity::EntityState::Attacking;
 
 	}
 	if (ImGui::Button("Items", ImVec2(100, 50)))
@@ -117,7 +131,9 @@ void JRPG::draw()
 	renderer->begin();
 
 	////draw player
-	Sakura->eDraw(renderer, Sakura->m_CurUV);
+	PlayerChar->eDraw(renderer);
+	MonsterChar->eDraw(renderer);
+
 	//renderer->setUVRect(0, 0, 1, 1);
 	//renderer->drawSprite(m_HunterSakura, 600, 400, 0, 0, 0, 1, 0, 0);
 
@@ -168,23 +184,23 @@ void JRPG::draw()
 	//renderer->setUVRect(0, 0, 1, 1);
 	//renderer->drawSprite(m_Rath, 1200, 400, 0, 0, 0, 1, 0, 0);
 
-	renderer->drawSprite(m_CurPlayerAnimation, 400, 600, 222, 144, 0, 1, 0, 0);
+	//renderer->drawSprite(m_CurPlayerAnimation, 400, 600, 222, 144, 0, 1, 0, 0);
 
-	//animate monster
-	renderer->setUVRect(int(m_timer * 8) % 14 / 14.0f, 0, 1.f / 14, 1.f);
+	////animate monster
+	//renderer->setUVRect(int(m_timer * 8) % 14 / 14.0f, 0, 1.f / 14, 1.f);
 
-	//846 x 546
-	renderer->drawSprite(m_CurMonAnimation, 1000, 535, 846, 546, 0, 1, 0, 0);
+	////846 x 546
+	//renderer->drawSprite(m_CurMonAnimation, 1000, 535, 846, 546, 0, 1, 0, 0);
 
 	//show hp
 	char pHp[32];
-	sprintf_s(pHp, 32, "%i", Sakura->getHp());
+	sprintf_s(pHp, 32, "%i", PlayerChar->getHp());
 	renderer->drawText(m_font, pHp, 450, 600);
 	char mHp[32];
-	sprintf_s(mHp, 32, "%i", Rathalos->getHp());
+	sprintf_s(mHp, 32, "%i", MonsterChar->getHp());
 	renderer->drawText(m_font, mHp, 1000, 600);
 
-	if (Sakura->isAlive() != true)
+	if (!PlayerChar->isAlive())
 	{
 		char deadText[32];
 		sprintf_s(deadText, 32, "YOU DIED");
@@ -194,3 +210,4 @@ void JRPG::draw()
 
 	renderer->end();
 }
+

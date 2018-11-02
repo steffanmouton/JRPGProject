@@ -7,15 +7,9 @@ class Player :
 {
 public:
 	Player();
-	Player(int hp, int max, int min);
+	Player(int hp, int max, int min, Vector2 pos);
 	~Player();
 
-	float AnimationStart = 0;
-	float AnimationDraw = 0;
-	
-	void pUpdate(float dt) override;
-	/*void pDraw(aie::Renderer2D* renderer);*/
-	aie::Texture* m_CurPlayerAnimation;
-	
+	void eUpdate(float dt) override;
 };
 

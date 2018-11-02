@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
+#include "Vector2.h"
 #include <imgui.h>
 #include <iostream>
 #include <Renderer2D.h>
@@ -23,24 +24,37 @@ public:
 	void update(float dt) override;
 	void draw() override;
 
-	
+	float m_timer;
 
 protected:
 
 	aie::Renderer2D*	renderer;
-	aie::Texture*		m_RathIdle;
-	aie::Texture*		m_HunterSakuraIdle;
-	aie::Texture*		m_HunterSakuraAttack; //Each frame 153 x 150
-	aie::Texture*		m_HunterSakuraDying;
-	aie::Texture*		m_HunterSakuraDead;
-	aie::Texture*		m_CurPlayerAnimation;
-	aie::Texture*		m_CurMonAnimation;
+
+	
+
+	//Each frame 153 x 150
+	// TODO:: Rename Variables
+	Vector2				m_PlayerPos;
+	
+	aie::Texture*		m_PlayerIdle;
+	Rect*				m_PlayerIdleUV;
+	aie::Texture*		m_PlayerAttack; 
+	Rect*				m_PlayerAttackUV;
+	aie::Texture*		m_PlayerDying;
+	Rect*				m_PlayerDyingUV;
+	aie::Texture*		m_PlayerDead;
+	Rect*				m_PlayerDeadUV;
+
+	Vector2				m_MonsterPos;
+	aie::Texture*		m_MonsterIdle;
+	Rect*				m_MonsterIdleUV;
+
 	aie::Font*			m_font;
 
-	Entity* Sakura;
-	Entity* Rathalos;
+	Entity* PlayerChar;
+	Entity* MonsterChar;
 
 	float m_cameraX, m_cameraY;
-	float m_timer;
+	
 };
 
