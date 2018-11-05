@@ -7,7 +7,7 @@ class Player :
 {
 public:
 	Player();
-	Player(int hp, int max, int min, Vector2 pos);
+	Player(int hp, int max, int min, Vector2 pos, const char* name);
 	~Player();
 
 	void eUpdate(float dt) override;

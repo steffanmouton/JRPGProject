@@ -18,7 +18,7 @@ void Entity::TakeDmg(int Dmg)
 
 int Entity::DealDmg()
 {
-	return rand() % (m_MaxDmg-10) + m_MinDmg;
+	return rand() % (m_MaxDmg-m_MinDmg) + m_MinDmg;
 }
 
 int Entity::getHp()
@@ -38,7 +38,12 @@ void Entity::SetTarget(Entity * targ)
 
 bool Entity::isAlive()
 {
-	return this->m_Hp >= 0 ? true : false;
+	return this->m_Hp > 0 ? true : false;
+}
+
+const char* Entity::getName()
+{
+	return m_Name;
 }
 
 void Entity::eDraw(aie::Renderer2D * renderer)

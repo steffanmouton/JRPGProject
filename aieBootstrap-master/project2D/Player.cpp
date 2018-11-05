@@ -4,13 +4,14 @@ Player::Player()
 {
 }
 
-Player::Player(int hp, int max, int min, Vector2 pos)
+Player::Player(int hp, int max, int min, Vector2 pos, const char* name)
 {
 	m_Hp = hp;
 	m_MaxDmg = max;
 	m_MinDmg = min;
 	screenPosition.x = pos.x;
 	screenPosition.y = pos.y;
+	m_Name = name;
 }
 
 
@@ -69,8 +70,4 @@ void Player::eUpdate(float dt)
 	}
 	}
 }
-//
-//void Player::pDraw(aie::Renderer2D* renderer)
-//{
-//	renderer->setUVRect(int(m_timer * 8) % 27 / 27.0f, 150, 1.f / 27, 1.f);
-//}
+

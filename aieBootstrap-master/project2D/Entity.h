@@ -11,7 +11,10 @@ protected:
 	int m_MaxDmg;
 	int m_MinDmg;
 	float m_AliveTimer = 0;
+
+	const char* m_Name;
 	
+	Entity* m_Target;
 
 public:
 	Entity();
@@ -23,6 +26,9 @@ public:
 	void Attack();
 	void SetTarget(Entity* targ);
 	bool isAlive();
+	const char* getName();
+
+	
 
 	virtual void eUpdate(float dt) = 0;
 	
@@ -43,6 +49,6 @@ public:
 	
 	void eDraw(aie::Renderer2D* renderer);
 
-	Entity* m_Target;
+	
 };
 

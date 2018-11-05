@@ -7,7 +7,7 @@ class Monster :
 public:
 	
 	Monster();
-	Monster(int hp, int max, int min, Vector2 pos);
+	Monster(int hp, int max, int min, Vector2 pos, const char* name);
 	~Monster();
 
 	void eUpdate(float dt) override;

@@ -7,13 +7,14 @@ Monster::Monster()
 
 }
 
-Monster::Monster(int hp, int max, int min, Vector2 pos)
+Monster::Monster(int hp, int max, int min, Vector2 pos, const char* name)
 {
 	m_Hp = hp;
 	m_MaxDmg = max;
 	m_MinDmg = min;
 	screenPosition.x = pos.x;
 	screenPosition.y = pos.y;
+	m_Name = name;
 }
 
 

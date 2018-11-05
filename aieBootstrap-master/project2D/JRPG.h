@@ -45,6 +45,8 @@ protected:
 	aie::Texture*		m_PlayerDead;
 	Rect*				m_PlayerDeadUV;
 
+
+
 	Vector2				m_MonsterPos;
 	aie::Texture*		m_MonsterIdle;
 	Rect*				m_MonsterIdleUV;
@@ -53,6 +55,16 @@ protected:
 
 	Entity* PlayerChar;
 	Entity* MonsterChar;
+
+	Monster* Rathalos;
+	Monster* Quru;
+	Monster* Kelbi;
+
+	enum GameState { MissionBoard, Combat, Shop };
+	GameState gameState = MissionBoard;
+
+	enum CombatTurn {PTurn, MTurn};
+	CombatTurn combatTurn = PTurn;
 
 	float m_cameraX, m_cameraY;
 	
