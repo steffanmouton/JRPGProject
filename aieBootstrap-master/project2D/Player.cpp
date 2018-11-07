@@ -19,6 +19,16 @@ Player::~Player()
 {
 }
 
+void Player::buyFromShop(Item i)
+{
+	if (zenny >= i.cost)
+	{
+		zenny -= i.cost;
+		pInv->InsertFirst(i);
+	}
+
+}
+
 void Player::eUpdate(float dt)
 {
 	m_AliveTimer += dt;

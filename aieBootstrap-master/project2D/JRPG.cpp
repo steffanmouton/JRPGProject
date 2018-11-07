@@ -12,6 +12,10 @@ JRPG::~JRPG()
 
 bool JRPG::startup()
 {
+	a = new UnorderedLinkedList<int>();
+	a->InsertFirst(1);
+
+
 	//loading renderer
 	renderer = new aie::Renderer2D();
 
@@ -41,6 +45,7 @@ bool JRPG::startup()
 	m_PlayerDyingUV = new Rect(1, 1.f, 7, 153, 150);
 	m_PlayerDead = new aie::Texture("./textures/HunterSakuraDead.png");
 	m_PlayerDeadUV = new Rect(1, 1.f, 7, 153, 150);
+	PlayerChar->pInv = new UnorderedLinkedList<Item>;
 
 	PlayerChar->textures = {m_PlayerIdle, m_PlayerAttack, m_PlayerDying, m_PlayerDead };
 	PlayerChar->uvRects = { m_PlayerIdleUV, m_PlayerAttackUV, m_PlayerDyingUV, m_PlayerDeadUV };
@@ -48,6 +53,8 @@ bool JRPG::startup()
 	PlayerChar->m_CurTexture = PlayerChar->textures[0];
 	PlayerChar->m_CurUV = PlayerChar->uvRects[0];
 	PlayerChar->SetTarget(MonsterChar);
+
+	Store->sInv = new UnorderedLinkedList<Item>;
 
 	m_cameraX = 0;
 	m_cameraY = 0;
@@ -119,7 +126,7 @@ void JRPG::draw()
 	renderer->begin();
 
 	// draw textures and text
-	switch (gameState)
+	switch (FSM_gameState)
 	{
 	case MissionBoard:
 
@@ -155,14 +162,14 @@ void JRPG::draw()
 			renderer->drawText(m_font, deadText, 600, 600);
 		}
 
-		if (gameState == Combat && combatTurn == PTurn)
+		if (FSM_gameState == Combat && FSM_combatTurn == PTurn)
 		{
 			char TurnText[32];
 			sprintf_s(TurnText, 32, "PLAYER TURN");
 			renderer->drawText(m_font, TurnText, 900, 1000);
 		}
 
-		if (gameState == Combat && combatTurn == MTurn)
+		if (FSM_gameState == Combat && FSM_combatTurn == MTurn)
 		{
 			char TurnText[32];
 			sprintf_s(TurnText, 32, "MONSTER TURN");
@@ -174,24 +181,24 @@ void JRPG::draw()
 	}
 
 	//drawing buttons
-	switch (gameState)
+	switch (FSM_gameState)
 	{
 	case MissionBoard:
 
 		ImGui::BeginMenu("");
 		if (ImGui::Button("Kelbi", ImVec2(100, 50)))
 		{
-			gameState = Combat;
+			FSM_gameState = Combat;
 			/*MonsterChar = Kelbi;*/
 		}
 		if (ImGui::Button("Qurupeco", ImVec2(100, 50)))
 		{
-			gameState = Combat;
+			FSM_gameState = Combat;
 		/*	MonsterChar = Quru;*/
 		}
 		if (ImGui::Button("Rathalos", ImVec2(100, 50)))
 		{
-			gameState = Combat;
+			FSM_gameState = Combat;
 			/*MonsterChar = Rathalos;*/
 		}
 	
@@ -214,7 +221,7 @@ void JRPG::draw()
 		}
 		if (ImGui::Button("Flee", ImVec2(100, 50)))
 		{
-			gameState = Shop;
+			FSM_gameState = Shop;
 		}
 
 		break;

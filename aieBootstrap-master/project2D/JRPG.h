@@ -7,6 +7,7 @@
 #include "Font.h"
 #include "Input.h"
 #include "Vector2.h"
+#include <UnorderedLinkedList.h>
 #include <imgui.h>
 #include <iostream>
 #include <Renderer2D.h>
@@ -25,6 +26,7 @@ public:
 	void draw() override;
 
 	float m_timer;
+	UnorderedLinkedList<int> *a;
 
 protected:
 
@@ -53,18 +55,20 @@ protected:
 
 	aie::Font*			m_font;
 
-	Entity* PlayerChar;
-	Entity* MonsterChar;
+	Player* PlayerChar;
+	Monster* MonsterChar;
 
 	Monster* Rathalos;
 	Monster* Quru;
 	Monster* Kelbi;
 
+	Shop* Store;
+
 	enum GameState { MissionBoard, Combat, Shop };
-	GameState gameState = MissionBoard;
+	GameState FSM_gameState = MissionBoard;
 
 	enum CombatTurn {PTurn, MTurn};
-	CombatTurn combatTurn = PTurn;
+	CombatTurn FSM_combatTurn = PTurn;
 
 	float m_cameraX, m_cameraY;
 	
