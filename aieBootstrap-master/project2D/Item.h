@@ -4,7 +4,9 @@ class Item
 public:
 	Item();
 	~Item();
-	const int cost;
+	int cost;
+
+	bool operator==(const Item rhs);
 
 protected:
 

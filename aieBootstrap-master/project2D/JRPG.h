@@ -7,6 +7,7 @@
 #include "Font.h"
 #include "Input.h"
 #include "Vector2.h"
+#include "Shop.h"
 #include <UnorderedLinkedList.h>
 #include <imgui.h>
 #include <iostream>
@@ -25,8 +26,9 @@ public:
 	void update(float dt) override;
 	void draw() override;
 
+	void turnSwitch();
+
 	float m_timer;
-	UnorderedLinkedList<int> *a;
 
 protected:
 
@@ -62,7 +64,8 @@ protected:
 	Monster* Quru;
 	Monster* Kelbi;
 
-	Shop* Store;
+	UnorderedLinkedList<Item>* storeInv;
+	Shop* generalStore;
 
 	enum GameState { MissionBoard, Combat, Shop };
 	GameState FSM_gameState = MissionBoard;

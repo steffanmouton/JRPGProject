@@ -12,6 +12,8 @@ Player::Player(int hp, int max, int min, Vector2 pos, const char* name)
 	screenPosition.x = pos.x;
 	screenPosition.y = pos.y;
 	m_Name = name;
+	pInv = new UnorderedLinkedList<Item>;
+	zenny = 0;
 }
 
 
@@ -60,6 +62,7 @@ void Player::eUpdate(float dt)
 			AnimationDraw = 0;
 			eState = Idle;
 			Attack();
+			turnDone = true;
 			break;
 		}
 		break;

@@ -31,6 +31,9 @@ void Monster::eUpdate(float dt)
 	{
 		eState = Dead;
 	}
+	
+	if ( turn && isAlive())
+		eState = Attacking;
 
 	switch (eState)
 	{
@@ -42,20 +45,22 @@ void Monster::eUpdate(float dt)
 		AnimationDraw = m_AliveTimer;
 		break;
 	}
-	/*case Entity::EntityState::Attacking:
+	case Entity::EntityState::Attacking:
 	{
 
-		this->m_CurTexture = textures.at(1);
-		this->m_CurUV = uvRects.at(1);
+		/*this->m_CurTexture = textures.at(1);
+		this->m_CurUV = uvRects.at(1);*/
 		AnimationDraw = m_AliveTimer - AnimationStart;
 
 		if (AnimationDraw >= 4.f)
 		{
 			AnimationDraw = 0;
+			Attack();
 			eState = Idle;
+			turnDone = true;
 		}
 		break;
-	}*/
+	}
 	case Entity::EntityState::Dead:
 	{
 		this->m_CurTexture = textures.at(2);
@@ -66,7 +71,6 @@ void Monster::eUpdate(float dt)
 		{
 			this->m_CurTexture = textures.at(3);
 			this->m_CurUV = uvRects.at(3);
-
 		}
 		break;
 	}

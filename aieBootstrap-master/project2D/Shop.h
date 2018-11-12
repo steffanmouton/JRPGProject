@@ -6,10 +6,10 @@
 class Shop
 {
 public:
-	Shop();
+	Shop(UnorderedLinkedList<Item>* inv);
 	~Shop();
 
-	void sellToPlayer(Player p);
+	/*void sellToPlayer(Player p);*/
 
 	UnorderedLinkedList<Item> *sInv;
 

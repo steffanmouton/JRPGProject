@@ -12,10 +12,6 @@ JRPG::~JRPG()
 
 bool JRPG::startup()
 {
-	a = new UnorderedLinkedList<int>();
-	a->InsertFirst(1);
-
-
 	//loading renderer
 	renderer = new aie::Renderer2D();
 
@@ -33,6 +29,7 @@ bool JRPG::startup()
 
 	MonsterChar->m_CurTexture = MonsterChar->textures[0];
 	MonsterChar->m_CurUV = MonsterChar->uvRects[0];
+	
 
 	//loading hunter Sakura animations and target
 	m_PlayerPos = { 400, 600 };
@@ -52,9 +49,13 @@ bool JRPG::startup()
 
 	PlayerChar->m_CurTexture = PlayerChar->textures[0];
 	PlayerChar->m_CurUV = PlayerChar->uvRects[0];
+
+	MonsterChar->SetTarget(PlayerChar);
 	PlayerChar->SetTarget(MonsterChar);
 
-	Store->sInv = new UnorderedLinkedList<Item>;
+	storeInv = new UnorderedLinkedList<Item>;
+	/*generalStore = new Shop(storeInv);*/
+
 
 	m_cameraX = 0;
 	m_cameraY = 0;
@@ -77,6 +78,8 @@ void JRPG::shutdown()
 	delete m_PlayerDyingUV;
 	delete m_PlayerDead;
 	delete m_PlayerDeadUV;
+	delete storeInv;
+	/*delete generalStore;*/
 	delete renderer;
 	
 	
@@ -94,23 +97,26 @@ void JRPG::update(float deltaTime)
 
 	// use arrow keys to move camera
 	if (input->isKeyDown(aie::INPUT_KEY_UP))
-		m_cameraY += 500.0f * deltaTime;
+		if (m_cameraY < 1000.0f)
+			m_cameraY += 500.0f * deltaTime;
 
 	if (input->isKeyDown(aie::INPUT_KEY_DOWN))
-		m_cameraY -= 500.0f * deltaTime;
+		if (m_cameraY > -1000.0f)
+			m_cameraY -= 500.0f * deltaTime;
 
 	if (input->isKeyDown(aie::INPUT_KEY_LEFT))
-		m_cameraX -= 500.0f * deltaTime;
+		if (m_cameraX > -1000.0f)
+			m_cameraX -= 500.0f * deltaTime;
 
 	if (input->isKeyDown(aie::INPUT_KEY_RIGHT))
-		m_cameraX += 500.0f * deltaTime;
-
-	if (input->isKeyDown(aie::INPUT_KEY_RIGHT))
-		m_cameraX += 500.0f * deltaTime;
+		if (m_cameraX < 1000.0f)
+			m_cameraX += 500.0f * deltaTime;
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
+
+	turnSwitch();
 }
 
 
@@ -148,6 +154,7 @@ void JRPG::draw()
 		sprintf_s(pHp, 32, "%i", PlayerChar->getHp());
 		renderer->drawText(m_font, pHp, 450, 555);
 
+		//show Monster Name and hp
 		char mName[32];
 		sprintf_s(mName, 32, MonsterChar->getName());
 		renderer->drawText(m_font, mName, 1400, 580);
@@ -199,6 +206,8 @@ void JRPG::draw()
 		if (ImGui::Button("Rathalos", ImVec2(100, 50)))
 		{
 			FSM_gameState = Combat;
+			FSM_combatTurn = PTurn;
+			PlayerChar->turn = true;
 			/*MonsterChar = Rathalos;*/
 		}
 	
@@ -209,25 +218,40 @@ void JRPG::draw()
 		ImGui::BeginMenu("Battle");
 		if (ImGui::Button("Attack", ImVec2(100, 50)))
 		{
-			PlayerChar->eState = Entity::EntityState::Attacking;
+			if (FSM_combatTurn == PTurn)
+				PlayerChar->eState = Entity::EntityState::Attacking;
 		}
 		if (ImGui::Button("Items", ImVec2(100, 50)))
 		{
 
 		}
-		if (ImGui::Button("Guard", ImVec2(100, 50)))
-		{
-
-		}
 		if (ImGui::Button("Flee", ImVec2(100, 50)))
 		{
-			FSM_gameState = Shop;
+			if (FSM_combatTurn == PTurn)
+				FSM_gameState = Shop;
 		}
 
 		break;
 	}
 
 	renderer->end();
+}
+
+void JRPG::turnSwitch()
+{
+	if (PlayerChar->turnDone)
+	{
+		FSM_combatTurn == MTurn;
+		PlayerChar->turn = false;
+		MonsterChar->turn = true;
+	}
+
+	if (MonsterChar->turnDone)
+	{
+		FSM_combatTurn == PTurn;
+		MonsterChar->turn = false;
+		PlayerChar->turn = true;
+	}
 }
 
 
@@ -237,7 +261,7 @@ void JRPG::draw()
 
 
 
-
+// Drawing Reference-------------------------------------------------
 
 //renderer->setUVRect(0, 0, 1, 1);
 //renderer->drawSprite(m_HunterSakura, 600, 400, 0, 0, 0, 1, 0, 0);

@@ -26,6 +26,8 @@ public:
 	void Attack();
 	void SetTarget(Entity* targ);
 	bool isAlive();
+	bool turn = false;
+	bool turnDone = false;
 	const char* getName();
 
 	
