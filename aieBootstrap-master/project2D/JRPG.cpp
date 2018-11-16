@@ -20,7 +20,7 @@ bool JRPG::startup()
 
 	//loading Rathalos animations and target
 	m_MonsterPos = { 1200, 600 };
-	MonsterChar = new Monster{ 300, 100, 10, m_MonsterPos, "Rathalos" };
+	MonsterChar = new Monster{ 300, 60, 20, m_MonsterPos, "Rathalos" };
 	m_MonsterIdle = new aie::Texture("./textures/RathIdleAnimation.png");
 	m_MonsterIdleUV = new Rect(14, 1.f, 7, 846, 546);
 

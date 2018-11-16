@@ -1,7 +1,6 @@
 #pragma once
 #include "Entity.h"
 #include "Item.h"
-#include "Shop.h"
 #include <UnorderedLinkedList.h>
 
 class Renderer2D;
@@ -19,6 +18,7 @@ public:
 
 
 	void eUpdate(float dt) override;
+	void Heal(int amt) override;
 
 protected:
 	int zenny;

@@ -1,5 +1,5 @@
 #include "Item.h"
-
+#include "Entity.h"
 
 
 Item::Item()
@@ -9,6 +9,10 @@ Item::Item()
 
 
 Item::~Item()
+{
+}
+
+void Item::Use(Player* targ)
 {
 }
 

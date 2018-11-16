@@ -11,6 +11,13 @@ HealingPotion::~HealingPotion()
 {
 }
 
-void HealingPotion::Drink()
+int HealingPotion::HealPlayer()
 {
+	return m_hpValue;
 }
+
+void HealingPotion::Use(Player* targ)
+{
+	targ->Heal(HealPlayer());
+}
+

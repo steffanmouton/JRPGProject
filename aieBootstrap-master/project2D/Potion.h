@@ -6,7 +6,5 @@ class Potion :
 public:
 	Potion();
 	~Potion();
-
-	virtual void Drink() = 0;
 };
 

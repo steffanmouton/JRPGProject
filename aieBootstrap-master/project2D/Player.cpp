@@ -84,3 +84,8 @@ void Player::eUpdate(float dt)
 	}
 }
 
+void Player::Heal(int amt)
+{
+	m_Hp += amt;
+}
+

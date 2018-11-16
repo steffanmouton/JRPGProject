@@ -77,4 +77,9 @@ void Monster::eUpdate(float dt)
 	}
 }
 
+void Monster::Heal(int amt)
+{
+	m_Hp += amt;
+}
+
 

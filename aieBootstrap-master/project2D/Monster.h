@@ -11,6 +11,7 @@ public:
 	~Monster();
 
 	void eUpdate(float dt) override;
+	void Heal(int amt) override;
 
 	/*virtual void pDraw(aie::Renderer2D * renderer) override;*/
 

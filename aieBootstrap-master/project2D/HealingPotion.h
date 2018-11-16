@@ -3,10 +3,14 @@
 class HealingPotion :
 	public Potion
 {
+private:
+	int m_hpValue;
 public:
 	HealingPotion();
 	~HealingPotion();
 
-	void Drink() override;
+	int HealPlayer();
+
+	void Use(Player* targ) override;
 };
 
