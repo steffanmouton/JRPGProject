@@ -1,5 +1,5 @@
 #include "Entity.h"
-#include <stdlib.h>
+#include <cstdlib>
 
 
 Entity::Entity()
@@ -7,9 +7,8 @@ Entity::Entity()
 }
 
 
-Entity::~Entity()
-{
-}
+
+Entity::~Entity() = default;
 
 void Entity::TakeDmg(int Dmg)
 {
@@ -38,7 +37,7 @@ void Entity::SetTarget(Entity * targ)
 
 bool Entity::isAlive()
 {
-	return this->m_Hp > 0 ? true : false;
+	return this->m_Hp > 0;
 }
 
 const char* Entity::getName()

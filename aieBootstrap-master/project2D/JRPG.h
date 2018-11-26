@@ -38,7 +38,7 @@ protected:
 
 	//Each frame 153 x 150
 	// TODO:: Rename Variables
-	Vector2				m_PlayerPos;
+	vector2				m_PlayerPos;
 	
 	aie::Texture*		m_PlayerIdle;
 	Rect*				m_PlayerIdleUV;
@@ -51,7 +51,7 @@ protected:
 
 
 
-	Vector2				m_MonsterPos;
+	vector2				m_MonsterPos;
 	aie::Texture*		m_MonsterIdle;
 	Rect*				m_MonsterIdleUV;
 

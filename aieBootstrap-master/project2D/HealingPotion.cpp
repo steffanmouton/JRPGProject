@@ -18,6 +18,6 @@ int HealingPotion::HealPlayer()
 
 void HealingPotion::Use(Player* targ)
 {
-	targ->Heal(HealPlayer());
+	/*targ->Heal(HealPlayer());*/
 }
 

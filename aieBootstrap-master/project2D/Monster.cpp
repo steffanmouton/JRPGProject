@@ -2,12 +2,9 @@
 
 
 
-Monster::Monster()
-{
+Monster::Monster() = default;
 
-}
-
-Monster::Monster(int hp, int max, int min, Vector2 pos, const char* name)
+Monster::Monster(int hp, int max, int min, vector2 pos, const char* name)
 {
 	m_Hp = hp;
 	m_MaxDmg = max;

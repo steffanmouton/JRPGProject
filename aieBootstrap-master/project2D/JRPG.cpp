@@ -119,7 +119,6 @@ void JRPG::update(float deltaTime)
 	turnSwitch();
 }
 
-
 void JRPG::draw()
 {
 	//wipe screen to default color

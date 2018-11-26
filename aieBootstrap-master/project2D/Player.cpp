@@ -4,7 +4,7 @@ Player::Player()
 {
 }
 
-Player::Player(int hp, int max, int min, Vector2 pos, const char* name)
+Player::Player(int hp, int max, int min, vector2 pos, const char* name)
 {
 	m_Hp = hp;
 	m_MaxDmg = max;

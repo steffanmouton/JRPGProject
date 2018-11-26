@@ -7,9 +7,7 @@ Rect::Rect()
 }
 
 
-Rect::~Rect()
-{
-}
+Rect::~Rect() = default;
 
 Rect::Rect(int c, float Y, float speed, float w, float h)
 {

@@ -2,7 +2,7 @@
 #include "Renderer2D.h"
 #include <vector>
 #include "Rect.h"
-#include "Vector2.h"
+#include "vector2.h"
 
 class Entity
 {
@@ -46,7 +46,7 @@ public:
 	std::vector<Rect*> uvRects;
 	Rect* m_CurUV;
 
-	Vector2 screenPosition;
+	vector2 screenPosition;
 
 	float AnimationStart = 0;
 	float AnimationDraw = 0;
