@@ -20,6 +20,8 @@ public:
 	void eUpdate(float dt) override;
 	void Heal(int amt) override;
 
+	void changeZenny(int amt);
+
 protected:
 	int zenny;
 };

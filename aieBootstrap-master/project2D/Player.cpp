@@ -28,7 +28,6 @@ void Player::buyFromShop(Item i)
 		zenny -= i.cost;
 		pInv->InsertFirst(i);
 	}
-
 }
 
 void Player::eUpdate(float dt)
@@ -87,5 +86,10 @@ void Player::eUpdate(float dt)
 void Player::Heal(int amt)
 {
 	m_Hp += amt;
+}
+
+void Player::changeZenny(int amt)
+{
+	zenny += amt;
 }
 

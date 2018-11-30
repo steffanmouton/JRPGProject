@@ -7,17 +7,14 @@ HealingPotion::HealingPotion()
 }
 
 
-HealingPotion::~HealingPotion()
-{
-}
+HealingPotion::~HealingPotion() = default;
 
 int HealingPotion::HealPlayer()
 {
 	return m_hpValue;
 }
 
-void HealingPotion::Use(Player* targ)
+void HealingPotion::Use(Entity* targ)
 {
-	/*targ->Heal(HealPlayer());*/
+	targ->Heal(HealPlayer());
 }
-

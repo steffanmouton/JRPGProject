@@ -11,6 +11,6 @@ public:
 
 	int HealPlayer();
 
-	void Use(Player* targ) override;
+	void Use(Entity* targ) override;
 };
 

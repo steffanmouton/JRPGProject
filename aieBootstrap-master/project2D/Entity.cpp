@@ -40,6 +40,11 @@ bool Entity::isAlive()
 	return this->m_Hp > 0;
 }
 
+void Entity::Heal(int amt)
+{
+	m_Hp = +amt;
+}
+
 const char* Entity::getName()
 {
 	return m_Name;

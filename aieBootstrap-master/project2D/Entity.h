@@ -26,7 +26,7 @@ public:
 	void Attack();
 	void SetTarget(Entity* targ);
 	bool isAlive();
-	virtual void Heal(int amt) = 0;
+	virtual void Heal(int amt);
 
 	bool turn = false;
 	bool turnDone = false;

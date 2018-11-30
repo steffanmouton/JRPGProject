@@ -1,27 +1,26 @@
 #include "Item.h"
 #include "Entity.h"
-#include "Player.h"
 
 Item::Item()
 {
 	cost = 0;
+	m_target = nullptr;
 }
 
-
-Item::~Item()
+Item::Item(int c, Entity * targ)
 {
+	cost = c;
+	m_target = targ;
 }
 
-void Item::Use(Player* targ)
+
+Item::~Item() = default;
+
+void Item::Use(Entity* targ)
 {
 }
 
 bool Item::operator==(const Item rhs)
 {
-	if (this->name == rhs.name)
-	{
-		return true;
-	}
-	else
-		return false;
+	return this->name == rhs.name;
 }

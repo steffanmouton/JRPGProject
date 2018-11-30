@@ -45,11 +45,11 @@ void Monster::eUpdate(float dt)
 	case Entity::EntityState::Attacking:
 	{
 
-		/*this->m_CurTexture = textures.at(1);
-		this->m_CurUV = uvRects.at(1);*/
+		this->m_CurTexture = textures.at(1);
+		this->m_CurUV = uvRects.at(1);
 		AnimationDraw = m_AliveTimer - AnimationStart;
 
-		if (AnimationDraw >= 4.f)
+		if (AnimationDraw >= 2.f)
 		{
 			AnimationDraw = 0;
 			Attack();

@@ -18,20 +18,22 @@ bool JRPG::startup()
 	//loading font
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
-	//loading Rathalos animations and target
+	//loading Rathalos animations
 	m_MonsterPos = { 1200, 600 };
 	MonsterChar = new Monster{ 300, 60, 20, m_MonsterPos, "Rathalos" };
 	m_MonsterIdle = new aie::Texture("./textures/RathIdleAnimation.png");
 	m_MonsterIdleUV = new Rect(14, 1.f, 7, 846, 546);
+	m_MonsterAttack = new aie::Texture("./textures/RathAttackAnimation.png");
+	m_MonsterAttackUV = new Rect(8, 1.f, 7, 846, 546);
 
-	MonsterChar->textures = { m_MonsterIdle };
-	MonsterChar->uvRects = { m_MonsterIdleUV };
+	MonsterChar->textures = { m_MonsterIdle, m_MonsterAttack };
+	MonsterChar->uvRects = { m_MonsterIdleUV, m_MonsterAttackUV };
 
 	MonsterChar->m_CurTexture = MonsterChar->textures[0];
 	MonsterChar->m_CurUV = MonsterChar->uvRects[0];
 	
 
-	//loading hunter Sakura animations and target
+	//loading hunter Sakura animations
 	m_PlayerPos = { 400, 600 };
 	PlayerChar = new Player{ 100, 30, 10, m_PlayerPos, "Sakura" };
 	m_PlayerIdle = new aie::Texture("./textures/HunterSakuraIdle1.png");
@@ -55,6 +57,9 @@ bool JRPG::startup()
 
 	storeInv = new UnorderedLinkedList<Item>;
 	/*generalStore = new Shop(storeInv);*/
+
+	//starting zenny
+	PlayerChar->changeZenny(100);
 
 
 	m_cameraX = 0;
@@ -243,6 +248,7 @@ void JRPG::turnSwitch()
 		FSM_combatTurn == MTurn;
 		PlayerChar->turn = false;
 		MonsterChar->turn = true;
+		PlayerChar->turnDone = false;
 	}
 
 	if (MonsterChar->turnDone)
@@ -250,6 +256,7 @@ void JRPG::turnSwitch()
 		FSM_combatTurn == PTurn;
 		MonsterChar->turn = false;
 		PlayerChar->turn = true;
+		MonsterChar->turnDone = false;
 	}
 }
 
