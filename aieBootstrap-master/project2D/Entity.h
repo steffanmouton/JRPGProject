@@ -11,6 +11,7 @@ protected:
 	int m_MaxDmg;
 	int m_MinDmg;
 	float m_AliveTimer = 0;
+	int m_maxHp;
 
 	const char* m_Name;
 	
@@ -23,10 +24,12 @@ public:
 	void TakeDmg(int Dmg);
 	int DealDmg();
 	int getHp();
+	int getMaxHp();
 	void Attack();
 	void SetTarget(Entity* targ);
 	bool isAlive();
 	virtual void Heal(int amt);
+	void setHp(int amt);
 
 	bool turn = false;
 	bool turnDone = false;

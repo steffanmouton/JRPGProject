@@ -12,6 +12,7 @@
 #include <imgui.h>
 #include <iostream>
 #include <Renderer2D.h>
+#include "HealingPotion.h"
 
 
 class JRPG : public aie::Application
@@ -49,7 +50,6 @@ protected:
 	Rect*				m_PlayerDeadUV;
 
 
-
 	vector2				m_MonsterPos;
 
 	aie::Texture*		m_MonsterIdle;
@@ -58,7 +58,7 @@ protected:
 	Rect*				m_MonsterAttackUV;
 
 	aie::Font*			m_font;
-
+	 
 	Player* PlayerChar;
 	Monster* MonsterChar;
 
@@ -66,10 +66,14 @@ protected:
 	Monster* Quru;
 	Monster* Kelbi;
 
-	UnorderedLinkedList<Item>* storeInv;
-	Shop* generalStore;
+	vector2				m_ShopPos;
+	aie::Texture*		m_ShopIdle;
+	Rect*				m_ShopUV;
 
-	enum GameState { MissionBoard, Combat, Shop };
+
+
+
+	enum GameState { MissionBoard, Combat, Items, Shop, Rewards };
 	GameState FSM_gameState = MissionBoard;
 
 	enum CombatTurn {PTurn, MTurn};

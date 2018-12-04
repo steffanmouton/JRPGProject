@@ -4,14 +4,16 @@
 
 Monster::Monster() = default;
 
-Monster::Monster(int hp, int max, int min, vector2 pos, const char* name)
+Monster::Monster(int hp, int maxHp, int max, int min, vector2 pos, const char* name, int endReward)
 {
 	m_Hp = hp;
+	m_maxHp = maxHp;
 	m_MaxDmg = max;
 	m_MinDmg = min;
 	screenPosition.x = pos.x;
 	screenPosition.y = pos.y;
 	m_Name = name;
+	reward = endReward;
 }
 
 

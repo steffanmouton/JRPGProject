@@ -7,6 +7,7 @@ private:
 	int m_hpValue;
 public:
 	HealingPotion();
+	HealingPotion(int val);
 	~HealingPotion();
 
 	int HealPlayer();

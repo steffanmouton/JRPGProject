@@ -4,9 +4,10 @@ Player::Player()
 {
 }
 
-Player::Player(int hp, int max, int min, vector2 pos, const char* name)
+Player::Player(int hp, int maxHp, int max, int min, vector2 pos, const char* name)
 {
 	m_Hp = hp;
+	m_maxHp = maxHp;
 	m_MaxDmg = max;
 	m_MinDmg = min;
 	screenPosition.x = pos.x;
@@ -91,5 +92,10 @@ void Player::Heal(int amt)
 void Player::changeZenny(int amt)
 {
 	zenny += amt;
+}
+
+int Player::currentZenny()
+{
+	return zenny;
 }
 

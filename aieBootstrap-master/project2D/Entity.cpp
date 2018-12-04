@@ -25,6 +25,11 @@ int Entity::getHp()
 	return m_Hp;
 }
 
+int Entity::getMaxHp()
+{
+	return m_maxHp;
+}
+
 void Entity::Attack()
 {
 	this->m_Target->TakeDmg(DealDmg());
@@ -43,6 +48,11 @@ bool Entity::isAlive()
 void Entity::Heal(int amt)
 {
 	m_Hp = +amt;
+}
+
+void Entity::setHp(int amt)
+{
+	m_Hp = amt;
 }
 
 const char* Entity::getName()

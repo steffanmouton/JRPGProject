@@ -9,7 +9,7 @@ class Player :
 {
 public:
 	Player();
-	Player(int hp, int max, int min, vector2 pos, const char* name);
+	Player(int hp, int maxHp, int max, int min, vector2 pos, const char* name);
 	~Player();
 
 	void buyFromShop(Item i);
@@ -21,8 +21,14 @@ public:
 	void Heal(int amt) override;
 
 	void changeZenny(int amt);
+	int currentZenny();
+
+	int smallPotionCount;
+	int mediumPotionCount;
+	int largePotionCount;
 
 protected:
+	
 	int zenny;
 };
 

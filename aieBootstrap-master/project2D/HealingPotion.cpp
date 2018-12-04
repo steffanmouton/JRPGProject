@@ -6,6 +6,11 @@ HealingPotion::HealingPotion()
 {
 }
 
+HealingPotion::HealingPotion(int val)
+{
+	m_hpValue = val;
+}
+
 
 HealingPotion::~HealingPotion() = default;
 
