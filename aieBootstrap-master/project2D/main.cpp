@@ -1,18 +1,12 @@
-#include "JRPG.h"
-#include <stdlib.h>
-#include <time.h>
-#include <stdio.h>
+#include "Application2D.h"
 
-int main() 
-{
+int main() {
 	
-	srand(time(NULL));
-
 	// allocation
-	auto app = new JRPG();
+	auto app = new Application2D();
 
 	// initialise and loop
-	app->run("AIE", 1920, 1080, false);
+	app->run("AIE", 1280, 720, false);
 
 	// deallocation
 	delete app;
