@@ -281,6 +281,9 @@ void JRPG::draw()
 				PlayerChar->Heal(25);
 				PlayerChar->smallPotionCount--;
 			}
+			else
+				std::cout << "Error: Not Enough Potions!" << std::endl;
+
 			FSM_gameState = Combat;
 		}
 		if (ImGui::Button("Use Medium Potion 50hp", ImVec2(100, 50)))
@@ -290,6 +293,9 @@ void JRPG::draw()
 				PlayerChar->Heal(50);
 				PlayerChar->mediumPotionCount--;
 			}
+			else
+				std::cout << "Error: Not Enough Potions!" << std::endl;
+
 			FSM_gameState = Combat;
 		}
 		if (ImGui::Button("Use Large Potion 75hp", ImVec2(100, 50)))
@@ -299,6 +305,9 @@ void JRPG::draw()
 				PlayerChar->Heal(75);
 				PlayerChar->largePotionCount--;
 			}
+			else
+				std::cout << "Error: Not Enough Potions!" << std::endl;
+
 			FSM_gameState = Combat;
 		}
 		if (ImGui::Button("Return", ImVec2(100, 50)))
@@ -318,6 +327,8 @@ void JRPG::draw()
 				PlayerChar->changeZenny(-10);
 				PlayerChar->smallPotionCount++;
 			}
+			else
+				std::cout << "Error: Not Enough Zenny!" << std::endl;
 		}
 		if (ImGui::Button("Buy Medium Potion 25z", ImVec2(100, 50)))
 		{
@@ -326,6 +337,8 @@ void JRPG::draw()
 				PlayerChar->changeZenny(-25);
 				PlayerChar->mediumPotionCount++;
 			}
+			else
+				std::cout << "Error: Not Enough Zenny!" << std::endl;
 		}
 		if (ImGui::Button("Buy Large Potion 40z", ImVec2(100, 50)))
 		{
@@ -334,6 +347,8 @@ void JRPG::draw()
 				PlayerChar->changeZenny(-40);
 				PlayerChar->largePotionCount++;
 			}
+			else
+				std::cout << "Error: Not Enough Zenny!" << std::endl;
 		}
 		if (ImGui::Button("Return", ImVec2(100, 50)))
 		{
