@@ -51,12 +51,14 @@ bool JRPG::startup()
 	PlayerChar->m_CurTexture = PlayerChar->textures[0];
 	PlayerChar->m_CurUV = PlayerChar->uvRects[0];
 
+	//setting targets
 	MonsterChar->SetTarget(PlayerChar);
 	PlayerChar->SetTarget(MonsterChar);
 
 	//starting zenny
 	PlayerChar->changeZenny(100);
 
+	//Player's potion counts
 	PlayerChar->smallPotionCount = 0;
 	PlayerChar->mediumPotionCount = 0;
 	PlayerChar->largePotionCount = 0;
@@ -66,6 +68,7 @@ bool JRPG::startup()
 	m_cameraY = 0;
 	m_timer = 0;
 
+	//Drawing Shop
 	m_ShopPos = { 400, 600 };
 	m_ShopIdle = new aie::Texture("./textures/Shop.png");
 	m_ShopUV = new Rect(1, 1, 1, 1, 1);
@@ -198,6 +201,7 @@ void JRPG::draw()
 
 	case Shop:
 
+		//Drawing Shop data
 		char MoneyText[32];
 		sprintf_s(MoneyText, 32, "Current Zenny:");
 		renderer->drawText(m_font, MoneyText, 900, 1000);
@@ -337,17 +341,6 @@ void JRPG::draw()
 		}
 	}
 
-	/*if (ImGui::BeginChild("Items"))
-	{
-	if (ImGui::Button("Return", ImVec2(100, 50)))
-	{
-	if (ImGui::EndChild)
-	{
-
-	}
-	}
-	}*/
-
 	renderer->end();
 }
 
@@ -377,7 +370,7 @@ void JRPG::turnSwitch()
 
 
 
-// Drawing Reference-------------------------------------------------
+// Drawing Reference for future use-------------------------------------------------
 
 //renderer->setUVRect(0, 0, 1, 1);
 //renderer->drawSprite(m_HunterSakura, 600, 400, 0, 0, 0, 1, 0, 0);

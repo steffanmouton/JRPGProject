@@ -26,14 +26,17 @@ void Monster::eUpdate(float dt)
 {
 	m_AliveTimer += dt;
 
+	//checking for alive
 	if (!isAlive())
 	{
 		eState = Dead;
 	}
-	
+
+	//if Monster turn and is alive, state set to attack
 	if ( turn && isAlive())
 		eState = Attacking;
 
+	//FSM for drawing Monster Animations
 	switch (eState)
 	{
 	case Entity::EntityState::Idle:
@@ -76,6 +79,7 @@ void Monster::eUpdate(float dt)
 	}
 }
 
+//override for healing
 void Monster::Heal(int amt)
 {
 	m_Hp += amt;

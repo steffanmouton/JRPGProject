@@ -25,11 +25,13 @@ void Player::eUpdate(float dt)
 {
 	m_AliveTimer += dt;
 
+	//dead check
 	if (!isAlive())
 	{
 		eState = Dead;
 	}
 
+	//FSM for controlling player animations
 	switch (eState)
 	{
 	case Entity::EntityState::Idle:
@@ -74,16 +76,19 @@ void Player::eUpdate(float dt)
 	}
 }
 
+//heal override
 void Player::Heal(int amt)
 {
 	m_Hp += amt;
 }
 
+//change the player's money amount
 void Player::changeZenny(int amt)
 {
 	zenny += amt;
 }
 
+//return the current money amount
 int Player::currentZenny()
 {
 	return zenny;

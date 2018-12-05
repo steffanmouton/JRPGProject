@@ -9,6 +9,7 @@ Rect::Rect()
 
 Rect::~Rect() = default;
 
+//setting parameters for a UV rectangle
 Rect::Rect(int c, float Y, float speed, float w, float h)
 {
 	cycles = c;
