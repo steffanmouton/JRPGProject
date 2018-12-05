@@ -1,6 +1,5 @@
 #pragma once
 #include "List.h"
-#include <iostream>
 
 template<typename T>
 class UnorderedLinkedList : public LinkedListType<T>
@@ -30,7 +29,7 @@ public:
 		Node<T>* temp = new Node<T>{ item, this->first };				
 		this->first = temp;		
 
-		if (count == 1)
+		if (this->count == 1)
 		{
 			this->last = temp;
 		}
@@ -68,7 +67,7 @@ public:
 		
 		if (this->count == 0) //if list is empty, say so
 		{
-			std::cout << "List is empty" << std::endl;
+			/*std::cout << "List is empty" << std::endl;*/
 		}
 		//if only one node, reset first and last pointers to null
 		else if (this->count == 1 && lead->info == item) 

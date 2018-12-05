@@ -7,12 +7,9 @@
 #include "Font.h"
 #include "Input.h"
 #include "Vector2.h"
-#include "Shop.h"
-#include <UnorderedLinkedList.h>
 #include <imgui.h>
 #include <iostream>
 #include <Renderer2D.h>
-#include "HealingPotion.h"
 
 
 class JRPG : public aie::Application

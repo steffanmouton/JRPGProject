@@ -20,7 +20,7 @@ bool JRPG::startup()
 
 	//loading Rathalos animations
 	m_MonsterPos = { 1200, 600 };
-	MonsterChar = new Monster{ 300, 300, 60, 20, m_MonsterPos, "Rathalos" };
+	MonsterChar = new Monster{ 300, 300, 60, 20, m_MonsterPos, "Rathalos", 300 };
 	m_MonsterIdle = new aie::Texture("./textures/RathIdleAnimation.png");
 	m_MonsterIdleUV = new Rect(14, 1.f, 7, 846, 546);
 	m_MonsterAttack = new aie::Texture("./textures/RathAttackAnimation.png");
@@ -44,7 +44,6 @@ bool JRPG::startup()
 	m_PlayerDyingUV = new Rect(1, 1.f, 7, 153, 150);
 	m_PlayerDead = new aie::Texture("./textures/HunterSakuraDead.png");
 	m_PlayerDeadUV = new Rect(1, 1.f, 7, 153, 150);
-	PlayerChar->pInv = new UnorderedLinkedList<Item>;
 
 	PlayerChar->textures = {m_PlayerIdle, m_PlayerAttack, m_PlayerDying, m_PlayerDead };
 	PlayerChar->uvRects = { m_PlayerIdleUV, m_PlayerAttackUV, m_PlayerDyingUV, m_PlayerDeadUV };

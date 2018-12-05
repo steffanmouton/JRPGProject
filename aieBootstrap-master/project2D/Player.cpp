@@ -13,22 +13,12 @@ Player::Player(int hp, int maxHp, int max, int min, vector2 pos, const char* nam
 	screenPosition.x = pos.x;
 	screenPosition.y = pos.y;
 	m_Name = name;
-	pInv = new UnorderedLinkedList<Item>;
 	zenny = 0;
 }
 
 
 Player::~Player()
 {
-}
-
-void Player::buyFromShop(Item i)
-{
-	if (zenny >= i.cost)
-	{
-		zenny -= i.cost;
-		pInv->InsertFirst(i);
-	}
 }
 
 void Player::eUpdate(float dt)
